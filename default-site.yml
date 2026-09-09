@@ -1,7 +1,7 @@
 ---
 site:
-  title: Private Models-as-a-Service - A Practical Introduction with Red Hat AI
-  url: https://github.com/rhpds/private-rh1-llmaas-showroom
+  title: Models-as-a-Service - AI Assisted Coding Development Game
+  url: https://github.com/jingggg-wenn/maas-gametime
   start_page: modules::index.adoc
 
 content:
