@@ -1,5 +1,5 @@
 name: modules
-title: Private Models-as-a-Service - A Practical Introduction with Red Hat AI
+title: Models-as-a-Service - AI Assisted Coding Development Game
 version: main
 nav:
   - modules/ROOT/nav.adoc
@@ -10,7 +10,7 @@ asciidoc:
     page-pagination: true
     experimental:
     numbered:
-    lab_name: "Private Models-as-a-Service - A Practical Introduction with Red Hat AI"
+    lab_name: "Models-as-a-Service - AI Assisted Coding Development Game"
     guid: my-guid
     ssh_user: lab-user
     ssh_password: lab-user
@@ -18,7 +18,7 @@ asciidoc:
     minio-user: minio
     minio-pass: minio123
     minio-endpoint: http://minio.shared-minio.svc.cluster.local:9000/
-    git-clone-repo-url: https://github.com/rhpds/private-rh1-llmaas-showroom.git
+    git-clone-repo-url: https://github.com/jingggg-wenn/maas-gametime.git
     git-clone-repo-branch: main
     user: user1
     password: openshift
