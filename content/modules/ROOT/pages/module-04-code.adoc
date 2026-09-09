@@ -5,23 +5,13 @@
 
 Now that your AI assistant is wired up, it's time to get your hands dirty - by building a simple game using Continue's help. In this module, you're not solving a business-critical problem… yet! You're exploring, experimenting, and building confidence with AI-assisted coding through something fun: a simple game.
 
-== Choose a Game to Build
-
-Pick **one** of the following lightweight game projects, available in both Python and Bash:
-
-. **Rock Paper Scissors**: Play rock, paper, scissors against the computer!
-. **Word Scramble**: The program scrambles a word and the user has to guess what it is.
-. **Simple Quiz Game**: The program asks a few trivia questions and then gives a final score.
-
-You only need to pick one - but feel free to try more if you have time.
-
 == Open Your Starter File
 
-From the file explorer, navigate to the `game_starters` directory:
+From the file explorer, navigate to the `coding-exercises/fun-and-games/game_starters` directory:
 
 image::game-starters.png[width="50%"]
 
-Open the game file of your preference, in the language of your choice.
+Open the game file, in the language of your choice.
 
 The game files contain commented out instructions on how to proceed to create the game using the Continue chat interface. Read carefully! 
 
@@ -57,7 +47,7 @@ Example [substitute the correct path to your file]
 
 [source,console]
 ----
-cd /home/dev/rhone_code/game_templates/rock_paper_scissors/
+cd /projects/coding-exercises/fun-and-games/game_starters/rock_paper_scissors/
 ----
 
 Follow the instructions for the right code language:
@@ -109,7 +99,7 @@ Solutions are available here:
 
 [source,console]
 ----
-~/llama-stack-on-ocp/fun-and-games/game_solutions/
+/projects/coding-exercises/fun-and-games/game_solutions/
 ----
 
 Use the execution instructions in the above sections to run the code for any of the provided game programs!
@@ -117,8 +107,6 @@ Use the execution instructions in the above sections to run the code for any of 
 == Taking the Next Step
 
 You've now used Continue in a real, yet low-pressure, context - scaffolding, editing, testing and debugging a working application!
-
-In the next activity, we'll set up an agentic system in our Red Hat AI cluster.
 
 
 

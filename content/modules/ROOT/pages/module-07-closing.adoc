@@ -7,7 +7,6 @@ Over the course of this hands-on workshop, you experienced how generative AI and
 * Deployed and secured
 * Exposed as scalable services
 * Integrated into real workflows
-* Observed and monitored for impact
 
 All within an enterprise-ready OpenShift AI environment.
 

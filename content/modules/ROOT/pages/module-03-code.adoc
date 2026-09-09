@@ -29,27 +29,54 @@ As a developer, your environment should be fast, consistent, and ready to go for
 
 You could also leverage an exposed model API endpoint in your local environment as a developer, if the model is exposed properly. However, your company has not exposed the model outside of the confines of the cluster, so you are required to work within the environment and not locally.
 
-NOTE: Even though the model route information you copied from the OpenShift AI dashboard interface showed as an **External endpoint** route, there is no external route exposed in this cluster. However, the current MaaS implementation expects external route exposure so this naming is hardcoded into the dashboard. 
-
 === Access OpenShift Dev Spaces
 
-* Navigate to the OpenShift Dev Spaces application.
+* Navigate to the OpenShift Dev Spaces application from the OpenShift web console application menu.
 
 image::nav-devspaces.png[]
 
-When prompted for your login credentials, repeat the same user login from previous steps.
+When prompted for your login credentials, use your assigned workshop credentials (e.g., `user1` / `openshift`).
 
-Once authenticated, you will see the OpenShift Dev Spaces central dashboard. We have prepared a workspace for you to access. This is a VSCode IDE workspace with a prepared repository already cloned in and necessary dependencies.
+Once authenticated, you will see the OpenShift Dev Spaces central dashboard. From here, you will create your own workspace.
 
-When fully loaded, as indicated by a green dot by the workspace name (this could take a moment), click `Open`.
+=== Create a Workspace in DevSpaces
 
-image::open-workspace.png[]
+From the dashboard, click **Create Workspace** on the left sidebar.
 
-After a moment, you'll see the VSCode interface running in your browser. If prompted, click "Trust" when asked about the authors. We're friendly, I promise! 
+image::create-workspace-1.png[]
+
+Under **Editor Selector**, expand **Choose an Editor** and select **VS Code - Open Source**.
+
+image::select-vs-code.png[]
+
+In the **Import from Git** section, enter the following repository URL and click **Create & Open**:
+
+[source,text]
+----
+https://github.com/jingggg-wenn/coding-exercises.git
+----
+
+image::git-repo-source.png[]
+
+Alternatively, you can also create an **Empty Workspace** from the **Select a Sample** section and clone the repository manually afterwards.
+
+image::select-empty-workspace.png[]
+
+Dev Spaces will automatically:
+
+* Provision a dedicated namespace for your user (e.g., `user1-devspaces`)
+* Clone the repository into the workspace
+* Launch a VS Code editor in your browser
+
+This process may take a moment on the first run. When fully loaded, you will see the VS Code interface running in your browser.
+
+If prompted, click "Trust" when asked about the authors.
 
 image::trust-vscode.png[]
 
-Inside your workspace, you'll find the aforementioned cloned GitHub repository. This is where you will build and refine with some AI assistance. The only thing we need to configure now is our code extension.
+Inside your workspace, you will find the cloned repository.
+
+Now, the only thing we need to configure is our code extension.
 
 Before we dive into the code, let's meet **Continue**.
 
@@ -127,11 +154,11 @@ name: Local Assistant
 version: 1.0.0
 schema: v1
 models:
-  - name: Qwen3-4B-Instruct
+  - name: <provided-during-workshop>
     provider: openai
-    model: "qwen3-4b-instruct"
-    apiBase: "YOUR_MAAS_ROUTE/v1"
-    apiKey: "YOUR_API_KEY"
+    model: "<provided-during-workshop>"
+    apiBase: "<provided-during-workshop>/v1"
+    apiKey: "<provided-during-workshop>"
 context:
   - provider: code
   - provider: docs
@@ -142,12 +169,7 @@ context:
   - provider: codebase
 ----
 
-IMPORTANT: Replace the `apiBase` URL with your actual MaaS endpoint URL and `YOUR_API_KEY` with the API key from your MaaS application. Ensure you retain the `v1` at the end of the path.
-
-For example:
-
-* **apiBase**: `https://granite-model-maas.apps.example.com/llm/qwen3-4b-instruct/v1` (Note the `v1` at the end of the URL)
-* **apiKey**: `your-actual-api-key-here`
+IMPORTANT: The actual values for model name, model ID, API base URL, and API key will be provided by the instructor during the workshop. Replace all `<provided-during-workshop>` placeholders with the values given. Ensure you retain the `/v1` at the end of the apiBase path.
 
 Reference the complete configuration documentation here: https://docs.continue.dev/reference[Continue Documentation]
 
@@ -162,7 +184,7 @@ NOTE: If the container restarts, which will prompt you to have to reload the VSC
 You've now:
 
 * Set up a cloud IDE
-* Installed Continue and configured it to connect to your private Granite model
+* Installed Continue and configured it to connect to your private MaaS model endpoint
 * Set up an AI assistant that can refactor, edit and explain your code!
 
 Next, you will use Continue to help you develop a little fun game. 
