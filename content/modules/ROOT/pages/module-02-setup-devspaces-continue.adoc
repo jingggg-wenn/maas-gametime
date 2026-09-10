@@ -171,9 +171,44 @@ context:
 
 IMPORTANT: The actual values for model name, model ID, API base URL, and API key will be provided by the instructor during the workshop. Replace all `<provided-during-workshop>` placeholders with the values given. Ensure you retain the `/v1` at the end of the apiBase path.
 
+=== Workshop Model Configuration Values
+
+NOTE: The values below are specific to this workshop session. They may differ between workshops depending on the cluster and model deployment.
+
+Copy the following values into your `config.yaml`:
+
+[cols="1,3",options="header"]
+|===
+| Field | Value
+
+| name
+| `Qwen3.8-27B`
+
+| model
+| `qwen3.8-27b`
+
+| apiBase
+| `https://maas-gateway.apps.cluster-vnxvp.vnxvp.sandbox2316.opentlc.com/a-rh-department/qwen38-27b/v1`
+
+| apiKey
+| `sk-oai-1Ae3iODRbHuD1l4Gv_17nQSB3kdZ0wPBx5JCzrNnlJcNMkLOunN1PPvSTdPA3`
+|===
+
+Your completed model block should look like this:
+
+[source,yaml,subs=none]
+----
+models:
+  - name: Qwen3.8-27B
+    provider: openai
+    model: qwen3.8-27b
+    apiBase: https://maas-gateway.apps.cluster-vnxvp.vnxvp.sandbox2316.opentlc.com/a-rh-department/qwen38-27b/v1
+    apiKey: sk-oai-1Ae3iODRbHuD1l4Gv_17nQSB3kdZ0wPBx5JCzrNnlJcNMkLOunN1PPvSTdPA3
+----
+
 Reference the complete configuration documentation here: https://docs.continue.dev/reference[Continue Documentation]
 
-When the model is properly configured, you will see the model name, `Qwen3-4B-Instruct` in the Continue chat sidebar.
+When the model is properly configured, you will see the model name, `Qwen3.8-27B` in the Continue chat sidebar.
 
 Go ahead - test it out and chat a bit!
 
