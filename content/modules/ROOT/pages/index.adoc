@@ -3,3 +3,5 @@
 Welcome to the workshop. Click below to get started.
 
 xref:module-01-introduction.adoc#maas_introduction[Get Started - Module 1: Introduction]
+
+Source repository: https://github.com/jingggg-wenn/maas-gametime
