@@ -3,7 +3,7 @@
 [#code-asst]
 = AI-Assisted Development
 
-Now that you have your model endpoint and API key, you can proceed to your work as an AI developer. Your organization leverages OpenShift Dev Spaces for your development team to develop and collaborate all in one OpenShift cluster. And now, you have been given access to a Models as a Service endpoint to enhance your work.
+In this module, you will set up a cloud-based development environment using OpenShift Dev Spaces and install the Continue AI coding assistant extension. You will then configure Continue to connect to a model endpoint -- the same concept behind Models as a Service (MaaS) -- so you can use a foundation model directly from your IDE.
 
 == The impact of AI code assistants
 
