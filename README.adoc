@@ -4,7 +4,7 @@ This repo is a customized fork of the original https://github.com/rhpds/private-
 
 * *Repository:* https://github.com/jingggg-wenn/maas-gametime
 * *Forked from:* https://github.com/rhpds/private-rh1-llmaas-showroom
-* *Live docs:* https://jingggg-wenn.github.io/maas-gametime/modules/main/module-01-introduction.html#maas_introduction
+* *Live docs:* https://jingggg-wenn.github.io/maas-gametime/modules/main/index.html
 
 ---
 

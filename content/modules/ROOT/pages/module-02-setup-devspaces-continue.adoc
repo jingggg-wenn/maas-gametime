@@ -68,7 +68,11 @@ Dev Spaces will automatically:
 * Clone the repository into the workspace
 * Launch a VS Code editor in your browser
 
-This process may take a moment on the first run. When fully loaded, you will see the VS Code interface running in your browser.
+This process may take a moment on the first run. You will see a progress screen as the workspace is being provisioned.
+
+image::starting-vscode.png[]
+
+When fully loaded, you will see the VS Code interface running in your browser.
 
 If prompted, click "Trust" when asked about the authors.
 
