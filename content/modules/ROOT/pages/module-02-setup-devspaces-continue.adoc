@@ -154,7 +154,7 @@ This will open the `config.yaml` file. Delete the file contents and replace with
 
 [source,yaml,role="execute"]
 ----
-name: Local Assistant
+name: Main Config
 version: 1.0.0
 schema: v1
 models:
@@ -163,14 +163,14 @@ models:
     model: "<provided-during-workshop>"
     apiBase: "<provided-during-workshop>/v1"
     apiKey: "<provided-during-workshop>"
-context:
-  - provider: code
-  - provider: docs
-  - provider: diff
-  - provider: terminal
-  - provider: problems
-  - provider: folder
-  - provider: codebase
+    requestOptions:
+      verifySsl: false
+    defaultCompletionOptions:
+      maxTokens: 9216
+    roles:
+      - chat
+      - edit
+      - apply
 ----
 
 IMPORTANT: The actual values for model name, model ID, API base URL, and API key will be provided by the instructor during the workshop. Replace all `<provided-during-workshop>` placeholders with the values given. Ensure you retain the `/v1` at the end of the apiBase path.
@@ -192,7 +192,7 @@ Copy the following values into your `config.yaml`:
 | `qwen38-27b`
 
 | apiBase
-| `https://maas-gateway.apps.cluster-vnxvp.vnxvp.sandbox2316.opentlc.com/a-rh-department/qwen38-27b/v1`
+| `https://maas-models.apps.cluster-vnxvp.vnxvp.sandbox2316.opentlc.com/v1`
 
 | apiKey
 | `sk-oai-1Ae3iODRbHuD1l4Gv_17nQSB3kdZ0wPBx5JCzrNnlJcNMkLOunN1PPvSTdPA3`
@@ -206,8 +206,39 @@ models:
   - name: Qwen3.8-27B
     provider: openai
     model: qwen38-27b
-    apiBase: https://maas-gateway.apps.cluster-vnxvp.vnxvp.sandbox2316.opentlc.com/a-rh-department/qwen38-27b/v1
+    apiBase: https://maas-models.apps.cluster-vnxvp.vnxvp.sandbox2316.opentlc.com/v1
     apiKey: sk-oai-1Ae3iODRbHuD1l4Gv_17nQSB3kdZ0wPBx5JCzrNnlJcNMkLOunN1PPvSTdPA3
+    requestOptions:
+      verifySsl: false
+    defaultCompletionOptions:
+      maxTokens: 9216
+    roles:
+      - chat
+      - edit
+      - apply
+----
+
+TIP: If model responses are slow, you can disable the thinking mode by adding `extraBodyProperties` to `requestOptions`. Replace your model block with the following:
+
+[source,yaml,subs=none]
+----
+models:
+  - name: Qwen3.8-27B
+    provider: openai
+    model: qwen38-27b
+    apiBase: https://maas-models.apps.cluster-vnxvp.vnxvp.sandbox2316.opentlc.com/v1
+    apiKey: sk-oai-1Ae3iODRbHuD1l4Gv_17nQSB3kdZ0wPBx5JCzrNnlJcNMkLOunN1PPvSTdPA3
+    requestOptions:
+      verifySsl: false
+      extraBodyProperties:
+        chat_template_kwargs:
+          enable_thinking: false
+    defaultCompletionOptions:
+      maxTokens: 9216
+    roles:
+      - chat
+      - edit
+      - apply
 ----
 
 Reference the complete configuration documentation here: https://docs.continue.dev/reference[Continue Documentation]
