@@ -189,7 +189,7 @@ Copy the following values into your `config.yaml`:
 | `Qwen3.8-27B`
 
 | model
-| `qwen3.8-27b`
+| `qwen38-27b`
 
 | apiBase
 | `https://maas-gateway.apps.cluster-vnxvp.vnxvp.sandbox2316.opentlc.com/a-rh-department/qwen38-27b/v1`
@@ -205,7 +205,7 @@ Your completed model block should look like this:
 models:
   - name: Qwen3.8-27B
     provider: openai
-    model: qwen3.8-27b
+    model: qwen38-27b
     apiBase: https://maas-gateway.apps.cluster-vnxvp.vnxvp.sandbox2316.opentlc.com/a-rh-department/qwen38-27b/v1
     apiKey: sk-oai-1Ae3iODRbHuD1l4Gv_17nQSB3kdZ0wPBx5JCzrNnlJcNMkLOunN1PPvSTdPA3
 ----
