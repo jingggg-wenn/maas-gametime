@@ -1,0 +1,5 @@
+= Models-as-a-Service - AI Assisted Coding Development Game
+
+Welcome to the workshop. Click below to get started.
+
+xref:module-01-introduction.adoc#maas_introduction[Get Started - Module 1: Introduction]

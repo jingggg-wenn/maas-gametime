@@ -1,3 +1,13 @@
+= Models-as-a-Service - AI Assisted Coding Development Game
+
+This repo is a customized fork of the original https://github.com/rhpds/private-rh1-llmaas-showroom[Private LLM as a Service Showroom] workshop, adapted for an AI-assisted coding game session.
+
+* *Repository:* https://github.com/jingggg-wenn/maas-gametime
+* *Forked from:* https://github.com/rhpds/private-rh1-llmaas-showroom
+* *Live docs:* https://jingggg-wenn.github.io/maas-gametime/modules/main/module-01-introduction.html#maas_introduction
+
+---
+
 === Getting Started
 
 This template is designed to be used as a base for your showroom lab guides.
