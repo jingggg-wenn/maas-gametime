@@ -35,7 +35,7 @@ You could also leverage an exposed model API endpoint in your local environment 
 
 image::nav-devspaces.png[]
 
-When prompted for your login credentials, use your assigned workshop credentials (e.g., `user1` / `openshift`).
+When prompted for your login credentials, use your assigned workshop credentials (e.g., `userXX` / `openshift`).
 
 Once authenticated, you will see the OpenShift Dev Spaces central dashboard. From here, you will create your own workspace.
 
@@ -64,7 +64,7 @@ image::select-empty-workspace.png[]
 
 Dev Spaces will automatically:
 
-* Provision a dedicated namespace for your user (e.g., `user1-devspaces`)
+* Provision a dedicated namespace for your user (e.g., `userXX-devspaces`)
 * Clone the repository into the workspace
 * Launch a VS Code editor in your browser
 

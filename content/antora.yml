@@ -20,7 +20,6 @@ asciidoc:
     minio-endpoint: http://minio.shared-minio.svc.cluster.local:9000/
     git-clone-repo-url: https://github.com/jingggg-wenn/maas-gametime.git
     git-clone-repo-branch: main
-    user: user1
     password: openshift
     openshift_api_url: https://api.cluster-guid.guid.sandbox.opentlc.com:6443
     openshift_cluster_ingress_domain: apps.cluster-guid.guid.sandbox.opentlc.com
@@ -42,7 +41,7 @@ asciidoc:
     deliverable: lab
     productname-long: Red Hat OpenShift AI
     productname-short: OpenShift AI
-    page-user: "{user}"
+    page-user: ""
     page-links: links
     page-rhoai_dashboard_url: "https://rhods-dashboard-redhat-ods-applications.{openshift_cluster_ingress_domain}/"
     page-openshift_cluster_console_url: "https://console-openshift-console.{openshift_cluster_ingress_domain}"
