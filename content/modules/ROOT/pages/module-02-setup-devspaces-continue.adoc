@@ -158,11 +158,11 @@ name: Main Config
 version: 1.0.0
 schema: v1
 models:
-  - name: <provided-during-workshop>
+  - name: gemma-4-e4b-it
     provider: openai
-    model: "<provided-during-workshop>"
-    apiBase: "<provided-during-workshop>/v1"
-    apiKey: "<provided-during-workshop>"
+    model: "<MODEL_ID>"
+    apiBase: "<MAAS_API_BASE_URL>/v1"
+    apiKey: "<YOUR_GENERATED_API_KEY>"
     requestOptions:
       verifySsl: false
     defaultCompletionOptions:
@@ -173,66 +173,23 @@ models:
       - apply
 ----
 
-IMPORTANT: The actual values for model name, model ID, API base URL, and API key will be provided by the instructor during the workshop. Replace all `<provided-during-workshop>` placeholders with the values given. Ensure you retain the `/v1` at the end of the apiBase path.
+IMPORTANT: The `apiBase` URL must end with `/v1`. For example: `https://maas.apps.ocp.xxxxx.opentlc.com/v1`
 
-=== Workshop Model Configuration Values
+To find your `<MODEL_ID>`, go to *Gen AI Studio* > *AI asset endpoints* > *Models*. Hover over the model name to see the full model ID (e.g. `publishers/user01/models/redhataigemma-4-e4b-it`).
 
-NOTE: The values below are specific to this workshop session. They may differ between workshops depending on the cluster and model deployment.
+image::img-maas-model-id.png[Model ID in AI asset endpoints,800]
 
-Copy the following values into your `config.yaml`:
+Here is an example of a working configuration:
 
-[cols="1,3",options="header"]
-|===
-| Field | Value
-
-| name
-| `Qwen3.8-27B`
-
-| model
-| `qwen38-27b`
-
-| apiBase
-| `https://maas-models.apps.cluster-vnxvp.vnxvp.sandbox2316.opentlc.com/v1`
-
-| apiKey
-| `sk-oai-1Ae3iODRbHuD1l4Gv_17nQSB3kdZ0wPBx5JCzrNnlJcNMkLOunN1PPvSTdPA3`
-|===
-
-Your completed model block should look like this:
-
-[source,yaml,subs=none]
+[source,yaml]
 ----
-models:
-  - name: Qwen3.8-27B
+  - name: gemma-4-e4b
     provider: openai
-    model: qwen38-27b
-    apiBase: https://maas-models.apps.cluster-vnxvp.vnxvp.sandbox2316.opentlc.com/v1
-    apiKey: sk-oai-1Ae3iODRbHuD1l4Gv_17nQSB3kdZ0wPBx5JCzrNnlJcNMkLOunN1PPvSTdPA3
+    model: publishers/user01/models/redhataigemma-4-e4b-it
+    apiBase: https://maas.apps.ocp.5sh6j.sandbox1809.opentlc.com/v1
+    apiKey: sk-oai-<your-api-key>
     requestOptions:
       verifySsl: false
-    defaultCompletionOptions:
-      maxTokens: 9216
-    roles:
-      - chat
-      - edit
-      - apply
-----
-
-TIP: If model responses are slow, you can disable the thinking mode by adding `extraBodyProperties` to `requestOptions`. Replace your model block with the following:
-
-[source,yaml,subs=none]
-----
-models:
-  - name: Qwen3.8-27B
-    provider: openai
-    model: qwen38-27b
-    apiBase: https://maas-models.apps.cluster-vnxvp.vnxvp.sandbox2316.opentlc.com/v1
-    apiKey: sk-oai-1Ae3iODRbHuD1l4Gv_17nQSB3kdZ0wPBx5JCzrNnlJcNMkLOunN1PPvSTdPA3
-    requestOptions:
-      verifySsl: false
-      extraBodyProperties:
-        chat_template_kwargs:
-          enable_thinking: false
     defaultCompletionOptions:
       maxTokens: 9216
     roles:
@@ -242,8 +199,6 @@ models:
 ----
 
 Reference the complete configuration documentation here: https://docs.continue.dev/reference[Continue Documentation]
-
-When the model is properly configured, you will see the model name, `Qwen3.8-27B` in the Continue chat sidebar.
 
 Go ahead - test it out and chat a bit!
 
