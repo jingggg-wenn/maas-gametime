@@ -1,0 +1,215 @@
+:imagesdir: ../../assets/images
+
+[#code-asst-kr]
+= AI 지원 개발 환경 구성
+
+이 모듈에서는 OpenShift Dev Spaces를 사용하여 클라우드 기반 개발 환경을 설정하고 Continue AI 코딩 어시스턴트 확장을 설치합니다. 그런 다음 Continue를 모델 엔드포인트에 연결하도록 구성합니다 -- 이것이 Models as a Service (MaaS)의 핵심 개념이며, IDE에서 직접 파운데이션 모델을 사용할 수 있게 됩니다.
+
+== AI 코드 어시스턴트의 영향
+
+단순히 코드를 작성하는 것이 아니라 **AI 기반 팀원**과 협업하게 됩니다.
+
+최신 코드 어시스턴트의 주요 기능:
+
+* **전체 프로젝트 컨텍스트 이해**: Continue, GitHub Copilot, Cursor 등의 어시스턴트는 파일과 디렉터리 전체를 읽어 코드가 어떻게 구성되어 있는지 파악합니다.
+
+* **자연어로 코드 편집**: "여기에 에러 처리를 추가해줘" 또는 "이것을 async로 변환해줘"와 같이 변경 사항을 설명하면 AI 어시스턴트가 이를 지능적으로 적용합니다.
+
+* **개선 사항 사전 제안**: 버그를 감지하고, 비효율성을 강조하며, 모범 사례 패턴을 권장합니다.
+
+* **반복 작업 자동화**: 단위 테스트와 docstring 생성부터 보일러플레이트 코드 작성, 프로젝트 전체 변수 이름 변경까지 -- 반복 작업을 처리하여 개발자가 로직과 설계에 집중할 수 있도록 합니다.
+
+이러한 어시스턴트는 단순히 코드를 작성하는 것이 아닙니다 -- 적절한 가드레일과 지식이 갖추어지면, 프로젝트를 이해하고 더 나은 소프트웨어를 더 빠르게 구축하는 데 도움을 줍니다. 대부분의 어시스턴트는 Visual Studio Code와 같은 주요 IDE에 원활하게 통합되므로 도구를 전환할 필요가 없습니다.
+
+설정을 시작하겠습니다.
+
+== 단계 1: OpenShift Dev Spaces를 활용한 클라우드 IDE 설정
+
+개발자로서 개발 환경은 빠르고, 일관되며, 즉시 사용 가능해야 합니다. OpenShift Dev Spaces가 바로 이를 제공합니다: 사전 구성된 컨테이너화 워크스페이스에 대한 즉각적인 접근 -- 모두 OpenShift 클러스터에서 안전하게 실행됩니다.
+
+노출된 모델 API 엔드포인트를 개발자의 로컬 환경에서도 활용할 수 있지만, 이 워크숍에서는 모델이 클러스터 외부로 노출되지 않았으므로 클러스터 내부 환경에서 작업해야 합니다.
+
+=== OpenShift Dev Spaces 접속
+
+* OpenShift 웹 콘솔의 애플리케이션 메뉴에서 OpenShift Dev Spaces 애플리케이션으로 이동합니다.
+
+image::nav-devspaces.png[]
+
+로그인 자격 증명을 입력하라는 메시지가 표시되면 배정받은 워크숍 자격 증명(예: `userXX` / `openshift`)을 사용합니다.
+
+인증이 완료되면 OpenShift Dev Spaces 중앙 대시보드가 표시됩니다. 여기에서 자신만의 워크스페이스를 생성합니다.
+
+=== Dev Spaces에서 워크스페이스 생성
+
+대시보드의 좌측 사이드바에서 **Create Workspace**를 클릭합니다.
+
+image::create-workspace-1.png[]
+
+**Editor Selector**에서 **Choose an Editor**를 펼치고 **VS Code - Open Source**를 선택합니다.
+
+image::select-vs-code.png[]
+
+**Import from Git** 섹션에 다음 리포지토리 URL을 입력하고 **Create & Open**을 클릭합니다:
+
+[source,text]
+----
+https://github.com/jingggg-wenn/coding-exercises.git
+----
+
+image::git-repo-source.png[]
+
+또는 **Select a Sample** 섹션에서 **Empty Workspace**를 생성한 후 수동으로 리포지토리를 복제할 수도 있습니다.
+
+image::select-empty-workspace.png[]
+
+Dev Spaces가 자동으로 다음을 수행합니다:
+
+* 사용자 전용 네임스페이스를 프로비저닝합니다 (예: `userXX-devspaces`)
+* 워크스페이스에 리포지토리를 복제합니다
+* 브라우저에서 VS Code 에디터를 실행합니다
+
+최초 실행 시 다소 시간이 소요될 수 있습니다. 워크스페이스가 프로비저닝되는 동안 진행 화면이 표시됩니다.
+
+image::starting-vscode.png[]
+
+로딩이 완료되면 브라우저에서 VS Code 인터페이스가 표시됩니다.
+
+메시지가 표시되면 작성자에 대해 "Trust"를 클릭합니다.
+
+image::trust-vscode.png[]
+
+워크스페이스 내부에 복제된 리포지토리가 표시됩니다.
+
+이제 코드 확장만 구성하면 됩니다.
+
+코드를 작성하기 전에, **Continue**를 소개하겠습니다.
+
+== 단계 2: Continue -- AI 코딩 팀원 추가
+
+**Continue**는 VS Code에 원활하게 통합되는 오픈소스 AI 코드 어시스턴트입니다. 기존의 코드 자동 완성 도구와 달리, Continue는 코드에 대해 자연스러운 대화를 나눌 수 있는 대화형 채팅 인터페이스를 제공합니다. 다음과 같은 작업을 요청할 수 있습니다:
+
+**"이 함수에 로깅을 추가해줘"**
+
+**"이 파일에 대한 단위 테스트를 생성해줘"**
+
+**"이것을 더 작은 컴포넌트로 리팩터링해줘"**
+
+**"이 코드가 무엇을 하는지 설명해줘"**
+
+Continue는 코드베이스와 프로젝트 컨텍스트를 완전히 파악한 상태에서 이러한 요청을 에디터에서 직접 실행합니다.
+
+Continue가 특히 강력한 이유는 유연성에 있습니다 -- 커스텀 모델 엔드포인트를 지원하므로 프라이빗 엔터프라이즈 모델에 연결하기에 적합합니다. **오픈소스** 솔루션인 Continue는 AI 코딩 워크플로에 대한 완전한 제어권을 제공합니다.
+
+NOTE: Continue는 본 워크숍에서 사용하는 AI 코딩 어시스턴트의 한 예시입니다. 사용하는 모델을 커스터마이즈할 수 있는 다른 코드 어시스턴트 확장에서도 동일한 방식으로 동작할 수 있습니다.
+
+=== Continue 설치
+
+좌측 하단의 네비게이션 항목을 선택하여 확장 마켓플레이스를 엽니다.
+
+image::nav-extensions.png[]
+
+검색창에서 **Continue**를 검색하고 **Install**을 클릭합니다.
+
+image::install-continue.png[]
+
+메시지가 표시되면 퍼블리셔를 신뢰하고 확장을 설치합니다.
+
+Continue 설치가 완료되었습니다 -- 다음으로 프라이빗 모델에 연결합니다.
+
+== 단계 3: Continue를 MaaS 모델에 연결
+
+좌측 네비게이션 패널에서 **Continue 사이드바 아이콘**으로 이동합니다:
+
+image::nav-continue.png[]
+
+NOTE: Continue 앱 사이드바의 테두리를 드래그하여 확장합니다.
+
+이 모듈에서 두 가지 작업을 수행합니다:
+
+. MaaS 모델에 연결합니다
+. 모델의 "지능"을 활용하여 재미있는 게임을 이해하고 배포한 다음, Kubernetes 배포 작업을 수행합니다
+
+Continue 코드 확장에 모델을 연결하려면 이전 모듈의 MaaS 애플리케이션에서 확인한 모델의 엔드포인트 URL과 API 키를 제공해야 합니다.
+
+NOTE: 필요한 경우, OpenShift AI 대시보드의 AI asset endpoints 섹션으로 돌아가 자격 증명을 확인하십시오.
+
+=== MaaS 엔드포인트 세부 정보 입력
+
+VS Code 창 상단의 검색창을 클릭합니다:
+
+image::vscode-search.png[]
+
+Continue 확장의 설정 파일을 검색합니다:
+
+[source,sh,role="execute"]
+----
+~/.continue/config.yaml
+----
+
+image::vscode-search-config.png[]
+
+`Enter`를 누릅니다.
+
+`config.yaml` 파일이 열립니다. 파일 내용을 삭제하고 다음으로 교체합니다:
+
+[source,yaml,role="execute"]
+----
+name: Main Config
+version: 1.0.0
+schema: v1
+models:
+  - name: gemma-4-e4b-it
+    provider: openai
+    model: "<MODEL_ID>"
+    apiBase: "<MAAS_API_BASE_URL>/v1"
+    apiKey: "<YOUR_GENERATED_API_KEY>"
+    requestOptions:
+      verifySsl: false
+    defaultCompletionOptions:
+      maxTokens: 9216
+    roles:
+      - chat
+      - edit
+      - apply
+----
+
+IMPORTANT: `apiBase` URL은 반드시 `/v1`로 끝나야 합니다. 예: `https://maas.apps.ocp.xxxxx.opentlc.com/v1`
+
+`<MODEL_ID>`를 확인하려면 *Gen AI Studio* > *AI asset endpoints* > *Models*로 이동합니다. 모델 이름 위에 마우스를 올려 전체 모델 ID를 확인합니다 (예: `publishers/user01/models/redhataigemma-4-e4b-it`).
+
+image::img-maas-model-id.png[AI asset endpoints의 모델 ID,800]
+
+작동하는 구성 예시는 다음과 같습니다:
+
+[source,yaml]
+----
+  - name: gemma-4-e4b
+    provider: openai
+    model: publishers/user01/models/redhataigemma-4-e4b-it
+    apiBase: https://maas.apps.ocp.5sh6j.sandbox1809.opentlc.com/v1
+    apiKey: sk-oai-<your-api-key>
+    requestOptions:
+      verifySsl: false
+    defaultCompletionOptions:
+      maxTokens: 9216
+    roles:
+      - chat
+      - edit
+      - apply
+----
+
+전체 구성 문서는 https://docs.continue.dev/reference[Continue Documentation]을 참조하십시오.
+
+테스트해 보십시오 -- 채팅을 통해 모델과 대화해 보시기 바랍니다.
+
+NOTE: 컨테이너가 재시작되어 VS Code 워크스페이스 창을 다시 로드해야 하는 경우, `config.yaml` 파일에 모델 구성 정보를 다시 입력해야 합니다.
+
+== AI 코딩 준비 완료
+
+이 모듈에서 다음을 완료했습니다:
+
+* 클라우드 IDE를 설정했습니다
+* Continue를 설치하고 프라이빗 MaaS 모델 엔드포인트에 연결하도록 구성했습니다
+* 코드를 리팩터링하고, 편집하고, 설명할 수 있는 AI 어시스턴트를 설정했습니다
+
+다음 모듈에서는 Continue를 활용하여 재미있는 게임을 개발합니다.

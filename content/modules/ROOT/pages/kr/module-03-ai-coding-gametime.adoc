@@ -1,0 +1,109 @@
+:imagesdir: ../../assets/images
+
+[#code-game-kr]
+= 게임 타임
+
+AI 어시스턴트 연결이 완료되었으니, 본격적으로 실습에 들어갑니다 -- Continue의 도움을 받아 간단한 게임을 만들어 봅니다. 이 모듈에서는 비즈니스 핵심 과제를 해결하는 것이 아닙니다. 재미있는 게임 개발을 통해 AI 지원 코딩을 탐색하고, 실험하며, 자신감을 쌓는 것이 목표입니다.
+
+== 스타터 파일 열기
+
+파일 탐색기에서 `coding-exercises/fun-and-games/game_starters` 디렉터리로 이동합니다:
+
+image::game-starters.png[width="50%"]
+
+원하는 언어의 게임 파일을 엽니다.
+
+게임 파일에는 Continue 채팅 인터페이스를 사용하여 게임을 만드는 방법에 대한 지침이 주석으로 포함되어 있습니다. 주의 깊게 읽어 주십시오.
+
+IMPORTANT: 게임 코드에 기여하지 않는 텍스트는 반드시 주석으로 유지하십시오. 각 파일의 첫 번째 섹션에서 코드 초안을 작성하는 방법을 설명합니다.
+
+== Continue를 활용한 게임 개발 및 개선
+
+작업할 파일을 열었으면 VS Code 창의 좌측에서 `Continue` 확장 탭을 다시 클릭합니다. 필요에 따라 파일 `Explorer`와 `Continue` 탭을 전환할 수 있습니다.
+
+image::toggle-sidebar.png[]
+
+=== Continue 사용 방법
+
+채팅 인터페이스 기능을 사용하여 코드에 대한 질문을 할 수 있습니다. 코드 자체와 직접 상호 작용하려면 작업하려는 코드 부분을 `하이라이트`한 후 `우클릭`해야 합니다. 우클릭하면 팝업 메뉴에서 `Continue`를 클릭합니다:
+
+image::continue-popup.png[width="50%"]
+
+각 Continue 옵션에 대한 간략한 설명입니다:
+
+**Add to Chat** - 선택한 코드를 Continue의 채팅 인터페이스에 공유하여 특정 섹션에 대해 질문하거나 특정 코드 부분의 수정 방법에 대한 권장 사항을 요청할 수 있습니다.
+
+**Add to Edit** - 새로운 Edit 모드 채팅 인터페이스를 열어 선택한 코드를 어떻게 수정할지 설명할 수 있습니다 (예: "이 함수를 async로 만들어줘" 또는 "에러 처리를 추가해줘").
+
+== 게임 실행 (및 플레이)
+
+완료되면 테스트하려는 파일을 저장합니다.
+
+VS Code 내의 Terminal 기능을 사용하여 애플리케이션을 테스트합니다. 터미널 세션을 열려면 VS Code 앱의 네비게이션 바에서 햄버거 메뉴를 통해 `Terminal` -> `New Terminal`로 이동합니다. 또는 kbd:[CTRL] + kbd:[`]를 누릅니다.
+
+파일이 있는 폴더로 이동합니다:
+
+예시 [파일의 올바른 경로로 대체하십시오]
+
+[source,console]
+----
+cd /projects/coding-exercises/fun-and-games/game_starters/rock_paper_scissors/
+----
+
+사용하는 코드 언어에 맞는 지침을 따릅니다:
+
+=== Python (.py)
+
+다음 명령을 실행합니다 (파일명을 대체하십시오):
+
+[source,console]
+----
+python your_filename.py
+----
+
+=== Bash (.sh)
+
+파일을 실행 가능하게 만듭니다 (최초 1회만 필요합니다). 파일명을 대체하십시오:
+
+[source,console]
+----
+chmod +x your_filename.sh
+----
+
+다음 명령을 실행합니다 (파일명을 대체하십시오):
+
+[source,console]
+----
+./your_filename.sh
+----
+
+=== 문제 해결
+
+**"command not found" 또는 "permission denied" 오류가 발생하는 경우**:
+
+* 파일 이름의 철자가 올바른지 확인합니다
+
+* 올바른 디렉터리에 있는지 확인합니다 (ls로 파일 목록을 확인)
+
+* .sh 파일의 경우, `./yourfile.sh`가 동작하지 않으면 `bash yourfile.sh`를 시도합니다.
+
+**기타 오류 또는 애플리케이션이 예상대로 동작하지 않는 경우**:
+
+* 코드 어시스턴트를 활용하여 디버깅하십시오.
+
+* 오류를 채팅에 입력하거나 문제를 설명하고 AI가 코드를 수정하도록 합니다 (전체 스크립트를 하이라이트하여 `Chat` 또는 `Edit`에 추가하면 모델이 평가하고 오류를 수정합니다).
+
+== 어려우면? 솔루션 참고
+
+솔루션은 다음 위치에서 확인할 수 있습니다:
+
+[source,console]
+----
+/projects/coding-exercises/fun-and-games/game_solutions/
+----
+
+위 섹션의 실행 지침을 사용하여 제공된 게임 프로그램의 코드를 실행하십시오.
+
+== 다음 단계로
+
+Continue를 실제 환경에서(부담 없이) 활용하여 애플리케이션을 스캐폴딩하고, 편집하고, 테스트하고, 디버깅하는 과정을 경험했습니다.

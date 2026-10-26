@@ -3,3 +3,10 @@
 * xref:module-03-ai-coding-gametime.adoc#code-game[Module 3: Game Time]
 * xref:module-04-closing.adoc#closing-summary[Closing Summary]
 * xref:module-05-resources.adoc#resources[Resources]
+
+.한국어 (Korean)
+* xref:kr/module-01-introduction.adoc#maas_introduction-kr[1: 소개]
+* xref:kr/module-02-setup-devspaces-continue.adoc#code-asst-kr[2: AI 지원 개발 환경 구성]
+* xref:kr/module-03-ai-coding-gametime.adoc#code-game-kr[3: 게임 타임]
+* xref:kr/module-04-closing.adoc#closing-summary-kr[마무리 요약]
+* xref:kr/module-05-resources.adoc#resources-kr[참고 자료]
